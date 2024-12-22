@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Background and layout styling */
+        body {
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            max-width: 600px;
+        }
+
+        /* Card styling */
+        .car-detail-card {
+            background-color: #ffffff;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .car-detail-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: #ffffff;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 1.5rem;
+        }
+
+        .list-group-item {
+            border: none;
+            font-size: 1rem;
+            padding: 12px 20px;
+            background-color: #f9f9f9;
+        }
+
+        .list-group-item:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        .list-group-item strong {
+            color: #2d3e50;
+        }
+
+        /* Special field styling */
+        .car-condition {
+            font-weight: bold;
+            color: #4caf50;
+        }
+        .status-pending {
+            color: #e53935;
+            font-weight: bold;
+        }
+
+        /* Footer styling */
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Card for Car Details -->
+        <div class="card car-detail-card">
+            <div class="card-header">
+                🚗 Car Information
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Model:</strong> <span th:text="${car.model}">Tesla Model S</span></li>
+                <li class="list-group-item"><strong>Company:</strong> <span th:text="${car.company}">Tesla</span></li>
+                <li class="list-group-item"><strong>Registration Number:</strong> <span th:text="${car.registrationNumber}">XYZ12345</span></li>
+                <li class="list-group-item"><strong>Fuel Type:</strong> <span th:text="${car.fuelType}">Electric</span></li>
+                <li class="list-group-item"><strong>Seating Capacity:</strong> <span th:text="${car.seatingCapacity}">5</span></li>
+                <li class="list-group-item"><strong>Mileage (km/l):</strong> <span th:text="${car.maileage}">0</span></li>
+                <li class="list-group-item"><strong>Insurance Number:</strong> <span th:text="${car.insuranceNumber}">INS-123456</span></li>
+                <li class="list-group-item"><strong>Car Condition:</strong> <span class="car-condition" th:text="${car.carCondition}">Excellent</span></li>
+                <li class="list-group-item"><strong>Current Status:</strong> <span th:text="${car.currentStatus}">Available</span></li>
+                <li class="list-group-item"><strong>Rental Rate (per day):</strong> ₹<span th:text="${car.rentalRate}">5000</span></li>
+                <li class="list-group-item"><strong>Previous Service Date:</strong> <span th:text="${car.previousServiceDate}">2024-01-15</span></li>
+                <li class="list-group-item"><strong>Next Service Date:</strong> <span th:text="${car.nextServiceDate}">2024-06-15</span></li>
+                <li class="list-group-item"><strong>Maintenance Status:</strong> 
+                    <span th:text="${car.maintenanceStatus}" class="status-pending">Pending</span>
+                </li>
+            </ul>
+        </div>
+        <!-- Footer -->
+        <div class="footer">
+            © 2024 Your Car Management System
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
