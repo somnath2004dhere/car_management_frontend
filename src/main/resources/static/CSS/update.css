@@ -5,78 +5,83 @@
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%; /* Ensures body and html take full height */
+    margin: 0; /* Removes default margins */
+}
+
 body {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: 100vh ;
     background: url('../images/back-update-car.jpg') no-repeat center center fixed;
     background-size: cover;
     position: relative;
+    overflow: hidden; /* Prevents unnecessary scrollbars */
 }
 
 body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    z-index: -1;
+	content: '';
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    height: 100%;
+	    background-color: rgba(0, 0, 0, 0.6);
+	    z-index: -1;
 }
-
-
 
 .container {
     display: grid;
-    grid-column: span 4; /* Adjust width of the container */
-    grid-column-start: 7; /* Position the container in the last columns */
-	grid-column-end: 12;
+    grid-column: span 5;
+    grid-column-start: 7;
+	grid-column-end: 12;;
     align-self: center;
     padding: 20px;
 }
 
 .form-container {
-    background: rgba(255, 255, 255, 0.1); /* More transparency */
-    border-radius: 15px; /* Rounded corners */
-    padding: 30px; /* Internal spacing */
-    color: white;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); /* Soft shadow */
-    backdrop-filter: blur(5px) saturate(180%); /* Blur effect with slight saturation */
-    -webkit-backdrop-filter: blur(5px) saturate(180%); /* For WebKit browsers */
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
-    height: 80vh; /* Height for the form */
-    overflow-y: auto; /* Scrollable content */
-    position: relative; /* Ensure stacking context */
+	background: rgba(255, 255, 255, 0.1); /* More transparency */
+	    border-radius: 15px; /* Rounded corners */
+	    padding: 30px; /* Internal spacing */
+	    color: white;
+	    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); /* Soft shadow */
+	    backdrop-filter: blur(5px) saturate(180%); /* Blur effect with slight saturation */
+	    -webkit-backdrop-filter: blur(5px) saturate(180%); /* For WebKit browsers */
+	    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+	    
+	
+	    
 }
 
-.form-container::-webkit-scrollbar {
-     display: none; /* Hides the scrollbar for WebKit browsers */
- }
- 
- .form-content {
-	margin-top:20px;
- }
- .Heading {
-     text-align: center;
-     position: sticky;
-     top: 0;
-     z-index: 2;
- }
+.form-content {
+    max-height: calc(100vh - 120px); /* Ensures no overflow issues */
+    overflow-y: auto; /* Enables scrolling within the form */
+    padding: 30px;
+}
 
- .Heading h1 {
-     font-size: 24px;
-     color: #E74C3C; /* Vibrant Red */
-     margin: 0;
-     text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.7); /* Subtle shadow */
- }
+.form-content::-webkit-scrollbar {
+    display: none; /* Hides the scrollbar for WebKit browsers */
+}
 
- label {
-     font-size: 16px;
-     color: #F1C40F; /* Bright Yellow */
-     text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5); /* Light shadow */
- }
+.Heading {
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
 
+.Heading h1 {
+    font-size: 24px;
+	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+    color: hotpink;
+    margin: 0;
+}
+
+label {
+    font-size: 16px;
+	color: #ffc8dd;
+
+}
 
 input, select {
     padding: 12px;
@@ -87,7 +92,7 @@ input, select {
     outline: none;
     font-size: 14px;
     margin-bottom: 15px;
-	margin-top:15px;
+    margin-top: 15px;
     width: 100%;
 }
 
@@ -103,13 +108,12 @@ input.valid, select.valid {
     border-color: green;
 }
 
-/* Error Styling */
 div.error {
     color: red;
     font-size: 12px;
-    font-weight: bold; /* Makes the error message bold */
-    margin-top: 5px; /* Adds margin above the error message */
-    margin-bottom: 10px; /* Adds margin below the error message */
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
 
 
@@ -199,22 +203,30 @@ select {
 	}
 
 
-	/* Responsive Styles */
+	@media screen and (max-width: 1200px) {
+	    .form-container {
+	        width: 90%;
+	        padding: 25px;
+	    }
+
+	    .Heading h1 {
+	        font-size: 22px;
+	    }
+	}
+
 	@media screen and (max-width: 768px) {
 	    body {
 	        grid-template-columns: 1fr;
-	        grid-template-rows: auto;
+	        padding: 0;
 	    }
 
 	    .container {
-	        grid-column: 1 / -1;
 	        width: 100%;
 	        padding: 10px;
 	    }
 
 	    .form-container {
-	        height: auto;
-	        padding: 20px;
+	        padding: 15px;
 	        width: 100%;
 	    }
 
@@ -227,7 +239,7 @@ select {
 	        padding: 10px;
 	    }
 
-	    .register {
+	    .update {
 	        font-size: 14px;
 	        padding: 10px;
 	    }
@@ -243,7 +255,7 @@ select {
 	        padding: 8px;
 	    }
 
-	    .register {
+	    .update {
 	        font-size: 12px;
 	        padding: 8px;
 	    }

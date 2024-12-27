@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     form.addEventListener("submit", function (e) {
         const registrationValue = registrationInput.value.trim();
-        const regEx = /^[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{4}$/;
+        const regEx = /^(?=.*[A-Z])(?=.*\d)[A-Z0-9-]+$/;
 
         if (!regEx.test(registrationValue)) {
             e.preventDefault(); // Prevent form submission
