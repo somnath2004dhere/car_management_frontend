@@ -245,3 +245,27 @@ input.valid, select.valid {
         padding: 8px;
     }
 }
+
+.success-message {
+    color: green;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+input.error, select.error {
+    border: 1px solid red;
+}
+
+input.valid, select.valid {
+    border: 1px solid green;
+}
+
+

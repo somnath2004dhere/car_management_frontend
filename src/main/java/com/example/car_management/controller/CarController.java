@@ -1,7 +1,5 @@
 package com.example.car_management.controller;
 
-
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpEntity;
@@ -20,58 +18,51 @@ import com.example.car_management.model.Car;
 @Configuration
 @Controller
 public class CarController {
-	
-	@Bean
-    RestTemplate restTemplate() {
-		return new RestTemplate();
-	}
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 
     @GetMapping("/car-register")
     public String showCarRegisterPage(Model model) {
-        // Returns the name of the Thymeleaf template without the ".html" extension
-    	model.addAttribute("car", new Car());
-        return "car-register";
+        model.addAttribute("car", new Car());
+        return "car-register"; // Thymeleaf template without ".html"
     }
-    
+
     @PostMapping("/register")
     public String submitCarForm(@ModelAttribute Car car, Model model) {
-    	try {
-    	String url = "http://localhost:8000/addCar";
-       System.out.println(car);
-		// header is used to set data in json
+        String backendUrl = "http://localhost:8000/addCar";
+        try {
+            // Prepare HTTP headers and request body
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Content-Type", "application/json");
 
-		HttpHeaders headers = new HttpHeaders();
-		headers.set("Content-Type", "application/json");
+            HttpEntity<Car> request = new HttpEntity<>(car, headers);
 
-		// send request to one application to other application
-		HttpEntity<Car> request = new HttpEntity<>(car, headers);// employee obj
+            // Make POST request to backend service
+            ResponseEntity<String> response = restTemplate().exchange(
+                backendUrl,
+                HttpMethod.POST,
+                request,
+                String.class
+            );
 
-		// Send the POST request
-//	        try {
-		ResponseEntity<Car> response = restTemplate().exchange(url, HttpMethod.POST, request, Car.class);
+            // Process response
+            if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
+                model.addAttribute("successMessage", "Car registered successfully!");
+                return "redirect:/";
+            } else {
+                model.addAttribute("errorMessage", response.getBody() != null
+                    ? "Backend error: " + response.getBody()
+                    : "Failed to register the car. Please try again.");
+            }
+        } catch (Exception e) {
+            // Log the exception (logging can be added here for production)
+            model.addAttribute("errorMessage", "An error occurred while processing your request: " + e.getMessage());
+        }
 
-		// REQUST TO GET THE RESPONCE
-		Car obj = null;
-		obj = response.getBody();// ACESS THE RESPONCE
-
-//	        }
-//	        catch(HttpClientErrorException e) {
-//	        	      	
-//	        	ObjectMapper objectMapper = new ObjectMapper();
-//	            JsonNode rootNode = objectMapper.readTree(e.getResponseBodyAsString());
-//	            String errorMessage = rootNode.path("message").asText();
-//	        	model.addAttribute("errorMessage", errorMessage);
-//	        		return "statuspage";
-//	       }
-
-		
-			model.addAttribute("action", "Registration");
-			return "statuspage";
-		}
-		catch(Exception e) {
-			model.addAttribute("errorMessage", "Car not added to the database");
-			return "statuspage";
-		}
-      
+        // Stay on the registration page with status messages
+        return "redirect:/car-register";
     }
 }
