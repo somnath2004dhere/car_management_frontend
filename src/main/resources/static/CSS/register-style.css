@@ -268,4 +268,9 @@ input.valid, select.valid {
     border: 1px solid green;
 }
 
+.field-error {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
 

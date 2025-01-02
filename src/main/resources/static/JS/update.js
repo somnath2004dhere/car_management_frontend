@@ -1,5 +1,5 @@
 // Wait for the DOM to fully load
-document.addEventListener("DOMContentLoaded", () => {
+/*document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("updation-form");
     const updateButton = document.querySelector(".update");
 
@@ -166,3 +166,4 @@ function displayPopup(message, type) {
         setTimeout(() => popup.remove(), 500);
     }, 3000);
 }
+*/

@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+/*document.addEventListener("DOMContentLoaded", function () {
     const form = document.querySelector(".verify-form");
     const registrationInput = document.getElementById("registration-number");
     const errorMessage = document.getElementById("error-message");
@@ -22,3 +22,4 @@ document.addEventListener("DOMContentLoaded", function () {
         registrationInput.style.borderColor = "#ccc"; // Reset border color
     });
 });
+*/

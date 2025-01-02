@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -76,27 +76,27 @@
 </head>
 <body>
     <div class="container">
+        <!-- Fallback if car object is missing -->
+        <div th:if="${car == null}" class="alert alert-danger">
+            <strong>Error:</strong> No car details available.
+        </div>
+
         <!-- Card for Car Details -->
-        <div class="card car-detail-card">
+        <div th:if="${car != null}" class="card car-detail-card">
             <div class="card-header">
                 🚗 Car Information
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item"><strong>Model:</strong> <span th:text="${car.model}">Tesla Model S</span></li>
-                <li class="list-group-item"><strong>Company:</strong> <span th:text="${car.company}">Tesla</span></li>
-                <li class="list-group-item"><strong>Registration Number:</strong> <span th:text="${car.registrationNumber}">XYZ12345</span></li>
-                <li class="list-group-item"><strong>Fuel Type:</strong> <span th:text="${car.fuelType}">Electric</span></li>
-                <li class="list-group-item"><strong>Seating Capacity:</strong> <span th:text="${car.seatingCapacity}">5</span></li>
-                <li class="list-group-item"><strong>Mileage (km/l):</strong> <span th:text="${car.maileage}">0</span></li>
-                <li class="list-group-item"><strong>Insurance Number:</strong> <span th:text="${car.insuranceNumber}">INS-123456</span></li>
-                <li class="list-group-item"><strong>Car Condition:</strong> <span class="car-condition" th:text="${car.carCondition}">Excellent</span></li>
-                <li class="list-group-item"><strong>Current Status:</strong> <span th:text="${car.currentStatus}">Available</span></li>
-                <li class="list-group-item"><strong>Rental Rate (per day):</strong> ₹<span th:text="${car.rentalRate}">5000</span></li>
-                <li class="list-group-item"><strong>Previous Service Date:</strong> <span th:text="${car.previousServiceDate}">2024-01-15</span></li>
-                <li class="list-group-item"><strong>Next Service Date:</strong> <span th:text="${car.nextServiceDate}">2024-06-15</span></li>
-                <li class="list-group-item"><strong>Maintenance Status:</strong> 
-                    <span th:text="${car.maintenanceStatus}" class="status-pending">Pending</span>
-                </li>
+                <li class="list-group-item"><strong>Model:</strong> <span th:text="${car.model ?: 'N/A'}">Tesla Model S</span></li>
+                <li class="list-group-item"><strong>Company:</strong> <span th:text="${car.company ?: 'N/A'}">Tesla</span></li>
+                <li class="list-group-item"><strong>Registration Number:</strong> <span th:text="${car.registrationNumber ?: 'N/A'}">XYZ12345</span></li>
+                <li class="list-group-item"><strong>Fuel Type:</strong> <span th:text="${car.fuelType ?: 'N/A'}">Electric</span></li>
+                <li class="list-group-item"><strong>Seating Capacity:</strong> <span th:text="${car.seatingCapacity ?: 'N/A'}">5</span></li>
+                <li class="list-group-item"><strong>Mileage (km/l):</strong> <span th:text="${car.mileage ?: 'N/A'}">0</span></li>
+                <li class="list-group-item"><strong>Insurance Number:</strong> <span th:text="${car.insuranceNumber ?: 'N/A'}">INS-123456</span></li>
+                <li class="list-group-item"><strong>Car Condition:</strong> <span class="car-condition" th:text="${car.carCondition ?: 'N/A'}">Excellent</span></li>
+                <li class="list-group-item"><strong>Current Status:</strong> <span th:text="${car.currentStatus ?: 'N/A'}">Available</span></li>
+                <li class="list-group-item"><strong>Rental Rate (per day):</strong> ₹<span th:text="${car.rentalRate ?: 'N/A'}">5000</span></li>
             </ul>
         </div>
         <!-- Footer -->

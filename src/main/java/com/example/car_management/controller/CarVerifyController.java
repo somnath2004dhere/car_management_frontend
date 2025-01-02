@@ -1,55 +1,63 @@
 package com.example.car_management.controller;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import com.example.car_management.model.Car;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.car_management.model.Car;
-
-@Configuration
 @Controller
 public class CarVerifyController {
 
-    // Display the car update page
-	@Bean
-    RestTemplate templateGet() {
-		return new RestTemplate();
-	}
+    private final RestTemplate restTemplate;
+
+    @Autowired
+    public CarVerifyController(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+
     @GetMapping("/search-car")
-    public String showCar() {
-        return "reg-verify"; 
+    public String showCar(Model model) {
+        model.addAttribute("car", new Car()); // Add an empty Car object to the model
+        return "search-car";
     }
-    
+
+
     @GetMapping("/getCar")
-    public String getCar(@RequestParam String registrationNumber, Model model) {
-    	try {
-        	String url = "http://localhost:8000/getCar/registrationnumber/" + registrationNumber;
-    		HttpHeaders headers = new HttpHeaders();
-    		headers.set("Content-Type", "application/json");
-    		
+    public String getCar(@ModelAttribute("car") Car car, Model model) {
+        String registrationNumber = car.getRegistrationNumber(); // Extract registration number
+        String backendUrl = "http://localhost:8000/getCar/registrationnumber/" + registrationNumber;
 
-    		ResponseEntity<Car> response = templateGet().exchange(url, HttpMethod.GET, null,
-    				new ParameterizedTypeReference<Car>() {
-    				});
-    		Car obj = response.getBody();
+        try {
+            ResponseEntity<Car> response = restTemplate.exchange(
+                backendUrl,
+                HttpMethod.GET,
+                null,
+                Car.class
+            );
 
-    		System.out.println(obj);
-    	
-    			model.addAttribute("car", obj);
-    			return "car"; 
-    		} catch(Exception e) {
-    			model.addAttribute("errorMessage", "No Cars found.");
-    			return "statuspage";
-    		}
+            Car fetchedCar = response.getBody();
+            if (fetchedCar != null) {
+                model.addAttribute("car", fetchedCar); // Add car details to the model
+                return "car"; // Render car.html template
+            }
+        } catch (HttpClientErrorException.NotFound e) {
+            // Backend returns 404 when the car is not found
+            model.addAttribute("errorMessage", "Enter a valid registration number");
+        } catch (Exception e) {
+            // Handle unexpected errors
+            model.addAttribute("errorMessage", "An unexpected error occurred: " + e.getMessage());
+        }
+
+        return "search-car"; // Stay on the search page with the error message
     }
+
 
 }
