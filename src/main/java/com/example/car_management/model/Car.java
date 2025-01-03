@@ -1,15 +1,10 @@
-
 package com.example.car_management.model;
 
 
-
-import java.time.LocalDate;
-
+import java.math.BigDecimal;
 
 
 import org.springframework.stereotype.Component;
-
-
 
 
 @Component
@@ -21,43 +16,38 @@ public class Car {
     private String registrationNumber;
     private String model;
     private String company;
-
-
-    private double mileage;
-
-
+    private BigDecimal mileage; 
     private int seatingCapacity;
-
-
     private String fuelType;
 
     private String insuranceNumber;
-
-   
     private String carCondition;
 
-    
     private String currentStatus;
-
-   
-    private double rentalRate;
-
-   
-    private LocalDate previousServiceDate;
-
-   
-    private LocalDate nextServiceDate;
-
-   
-    private String maintenanceStatus;
+    private BigDecimal rentalRate;
 
 
-
-   
+    // Default constructor
     public Car() {}
 
-    // Getters and setters
+    // Parameterized constructor
+    public Car(int carId, String registrationNumber, String model, String company, BigDecimal mileage, 
+               int seatingCapacity, String fuelType, String insuranceNumber, String carCondition, 
+               String currentStatus, BigDecimal rentalRate) {
+        this.carId = carId;
+        this.registrationNumber = registrationNumber;
+        this.model = model;
+        this.company = company;
+        this.mileage = mileage;
+        this.seatingCapacity = seatingCapacity;
+        this.fuelType = fuelType;
+        this.insuranceNumber = insuranceNumber;
+        this.carCondition = carCondition;
+        this.currentStatus = currentStatus;
+        this.rentalRate = rentalRate;
+    }
 
+    // Getters and setters for all fields
     public int getCarId() {
         return carId;
     }
@@ -90,11 +80,11 @@ public class Car {
         this.company = company;
     }
 
-    public double getMaileage() {
+    public BigDecimal getMileage() {
         return mileage;
     }
 
-    public void setMaileage(double mileage) {
+    public void setMileage(BigDecimal mileage) { 
         this.mileage = mileage;
     }
 
@@ -138,49 +128,19 @@ public class Car {
         this.currentStatus = currentStatus;
     }
 
-    public double getRentalRate() {
+    public BigDecimal getRentalRate() {
         return rentalRate;
     }
 
-    public void setRentalRate(double rentalRate) {
+    public void setRentalRate(BigDecimal rentalRate) {
         this.rentalRate = rentalRate;
     }
 
-    public LocalDate getPreviousServiceDate() {
-        return previousServiceDate;
+    @Override
+    public String toString() {
+        return "Car [id=" + carId + ", registrationNumber=" + registrationNumber + ", model=" + model + ", company="
+                + company + ", mileage=" + mileage + ", seatingCapacity=" + seatingCapacity + ", fuelType=" + fuelType
+                + ", insuranceNumber=" + insuranceNumber + ", carCondition=" + carCondition + ", currentStatus="
+                + currentStatus + ", rentalRate=" + rentalRate + "]";
     }
-
-    public void setPreviousServiceDate(LocalDate previousServiceDate) {
-        this.previousServiceDate = previousServiceDate;
-    }
-
-    public LocalDate getNextServiceDate() {
-        return nextServiceDate;
-    }
-
-    public void setNextServiceDate(LocalDate nextServiceDate) {
-        this.nextServiceDate = nextServiceDate;
-    }
-
-    public String getMaintenanceStatus() {
-        return maintenanceStatus;
-    }
-
-    public void setMaintenanceStatus(String maintenanceStatus) {
-        this.maintenanceStatus = maintenanceStatus;
-    }
-
-   
-
-	@Override
-	public String toString() {
-		return "Car [carId=" + carId + ", registrationNumber=" + registrationNumber + ", model=" + model + ", company="
-				+ company + ", maileage=" + mileage + ", seatingCapacity=" + seatingCapacity + ", fuelType=" + fuelType
-				+ ", insuranceNumber=" + insuranceNumber + ", carCondition=" + carCondition + ", currentStatus="
-				+ currentStatus + ", rentalRate=" + rentalRate + ", previousServiceDate=" + previousServiceDate
-				+ ", nextServiceDate=" + nextServiceDate + ", maintenanceStatus=" + maintenanceStatus + "]";
-	}
-    
-    
-
 }

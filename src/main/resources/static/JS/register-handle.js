@@ -1,185 +1,153 @@
 // Utility function to display error messages
-function validateField(field, validationFn, errorMessage) {
-    const isValid = validationFn(field.value);
-
-    // Remove existing error messages
+/*function validateField(field, validationFn, errorMessage) {
     const errorElementId = `${field.id}-error`;
     document.getElementById(errorElementId)?.remove();
 
-    if (!isValid) {
+    if (!validationFn(field.value)) {
+        // Create and insert error message
         const errorElement = document.createElement("div");
         errorElement.id = errorElementId;
         errorElement.className = "error-message";
         errorElement.textContent = errorMessage;
         field.insertAdjacentElement("afterend", errorElement);
-        field.classList.add("error");
-        field.classList.remove("valid"); // Remove green border
-    } else {
-        field.classList.remove("error");
-        field.classList.add("valid"); // Add green border
-    }
 
-    return isValid;
+        // Apply error styles to input field
+        field.classList.add("error");
+        field.classList.remove("valid");
+        return false;
+    } else {
+        // Remove error styles if validation passes
+        field.classList.remove("error");
+        field.classList.add("valid");
+        return true;
+    }
 }
 
-// Show a dynamic popup message
+// Function to show dynamic popup messages
 function showPopup(message, isSuccess) {
     const popup = document.createElement("div");
     popup.className = `popup ${isSuccess ? "success" : "error-popup"}`;
     popup.textContent = message;
-
     document.body.appendChild(popup);
-
-    // Automatically remove the popup after 3 seconds
     setTimeout(() => popup.remove(), 3000);
 }
 
-// Validation functions
-function validateRequired(value) {
-    return value.trim() !== "";
-}
+// Validation functions for each field
+const validators = {
+	regNumber: value => /^(?=.*[A-Z])(?=.*\d)[A-Z0-9-]+$/.test(value.trim()), // Validate regNumber
+	    model: value => /^[A-Za-z\s]+$/.test(value.trim()), // Model must be a string
+	    company: value => /^[A-Za-z\s]+$/.test(value.trim()), // Company must be a string
+	    mileage: value => /^[1-9]\d*(\.\d+)?$/.test(value.trim()), // Validate mileage to accept decimal or integer
+	    seatingCapacity: value => Number(value) > 0, // Positive integer for seating capacity
+	    fuelType: value => value.trim() !== "", // Fuel type must not be empty
+	    currentStatus: value => value.trim() !== "", // Current status must not be empty
+	    insuranceNumber: value => /^INS\d{10}$/.test(value.trim()), // Validate insurance number format
+	    carCondition: value => /^[A-Za-z\s]+$/.test(value.trim()), // Car condition must be a string
+	    rentalRate: value => /^[1-9]\d*(\.\d+)?$/.test(value.trim()), // Validate rental rate for positive decimal/integers
+	    previousServiceDate: value => value.trim() !== "", // Previous service date must not be empty
+	    nextServiceDate: value => value.trim() !== "", // Next service date must not be empty
+	    maintenanceStatus: value => /^[A-Za-z\s]+$/.test(value.trim()) // Maintenance status must be a string
+};
 
-function validateLetters(value) {
-    return /^[A-Za-z\s]+$/.test(value.trim());
-}
-
-function validatePositiveNumber(value) {
-    return /^[1-9]\d*(\.\d+)?$/.test(value.trim());
-}
-
-function validateRegistrationNumber(value) {
-    return /^(?=.*[A-Z])(?=.*\d)[A-Z0-9-]+$/.test(value.trim());
-}
-
-function validateInsuranceNumber(value) {
-    return /^INS\d{10}$/.test(value.trim());
-}
-
+// Validate service dates
 function validateServiceDates() {
-    const prevServiceDateField = document.getElementById("previousServiceDate");
-    const nextServiceDateField = document.getElementById("nextServiceDate");
-
-    const prevServiceDate = new Date(prevServiceDateField.value);
-    const nextServiceDate = new Date(nextServiceDateField.value);
-
+    const prevDateField = document.getElementById("previousServiceDate");
+    const nextDateField = document.getElementById("nextServiceDate");
+    const prevDate = new Date(prevDateField.value);
+    const nextDate = new Date(nextDateField.value);
     let isValid = true;
 
     // Remove existing error messages
     document.getElementById("previousServiceDate-error")?.remove();
     document.getElementById("nextServiceDate-error")?.remove();
 
-    if (prevServiceDate >= nextServiceDate) {
-        validateField(
-            prevServiceDateField,
-            () => false,
-            "Previous service date must be earlier than the next service date."
-        );
-        validateField(
-            nextServiceDateField,
-            () => false,
-            "Next service date must be later than the previous service date."
-        );
-        isValid = false;
-    }
+    if (prevDate >= nextDate) {
+        // Add error messages for invalid date order
+        const prevError = document.createElement("div");
+        prevError.id = "previousServiceDate-error";
+        prevError.className = "error-message";
+        prevError.textContent = "Previous service date must be earlier than the next service date.";
+        prevDateField.insertAdjacentElement("afterend", prevError);
 
+        const nextError = document.createElement("div");
+        nextError.id = "nextServiceDate-error";
+        nextError.className = "error-message";
+        nextError.textContent = "Next service date must be later than the previous service date.";
+        nextDateField.insertAdjacentElement("afterend", nextError);
+
+        prevDateField.classList.add("error");
+        nextDateField.classList.add("error");
+        prevDateField.classList.remove("valid");
+        nextDateField.classList.remove("valid");
+        isValid = false;
+    } else {
+        prevDateField.classList.remove("error");
+        prevDateField.classList.add("valid");
+        nextDateField.classList.remove("error");
+        nextDateField.classList.add("valid");
+    }
     return isValid;
 }
 
-// Attach validation to blur events
-const fieldsToValidate = [
-    "regNumber", "model", "company", "mileage", "seatingCapacity",
-    "fuelType", "currentStatus", "insuranceNumber", "carCondition",
-    "rentalRate", "previousServiceDate", "nextServiceDate", "maintenanceStatus"
-];
-
-fieldsToValidate.forEach(fieldId => {
-    const field = document.getElementById(fieldId);
-
-    if (fieldId === "regNumber") {
-        field.addEventListener("blur", () => {
-            validateField(field, validateRegistrationNumber, "Invalid registration number (format: AB12CD3456).");
-        });
-    } else if (fieldId === "insuranceNumber") {
-        field.addEventListener("blur", () => {
-            validateField(field, validateInsuranceNumber, "Invalid insurance number (format: INS followed by 10 digits).");
-        });
-    } else if (["model", "company", "maintenanceStatus"].includes(fieldId)) {
-        field.addEventListener("blur", () => {
-            validateField(field, validateLetters, `${fieldId.replace(/([A-Z])/g, ' $1')} must contain letters only.`);
-        });
-    } else if (["mileage", "rentalRate"].includes(fieldId)) {
-        field.addEventListener("blur", () => {
-            validateField(field, validatePositiveNumber, `${fieldId.replace(/([A-Z])/g, ' $1')} must be a positive number.`);
-        });
-    } else if (fieldId === "seatingCapacity") {
-        field.addEventListener("blur", () => {
-            validateField(field, value => Number(value) > 0, "Seating capacity must be a positive number.");
-        });
-    } else {
-        field.addEventListener("blur", () => {
-            validateField(field, validateRequired, `${fieldId.replace(/([A-Z])/g, ' $1')} is required.`);
-        });
-    }
+// Handle form validation on blur events
+document.querySelectorAll("input, select").forEach(field => {
+    field.addEventListener("blur", () => {
+        const validator = validators[field.id];
+        if (validator) {
+            const errorMessage = generateErrorMessage(field.id);
+            validateField(field, validator, errorMessage);
+        }
+    });
 });
 
-// Attach validation to service date fields
-const prevServiceDateField = document.getElementById("previousServiceDate");
-const nextServiceDateField = document.getElementById("nextServiceDate");
-
-prevServiceDateField.addEventListener("blur", validateServiceDates);
-nextServiceDateField.addEventListener("blur", validateServiceDates);
+// Generate specific error messages
+function generateErrorMessage(fieldId) {
+    const messages = {
+        regNumber: "Invalid registration number (format: AB12CD3456).",
+        model: "Model must be a string.",
+        company: "Company must be a string.",
+        mileage: "Mileage must be a positive integer.",
+        seatingCapacity: "Seating capacity must be a positive integer.",
+        fuelType: "Fuel type must be selected.",
+        currentStatus: "Current status must be selected.",
+        insuranceNumber: "Invalid insurance number (format: INS followed by 10 digits).",
+        carCondition: "Car condition must be a string.",
+        rentalRate: "Rental rate must be a positive number.",
+        previousServiceDate: "Previous service date is invalid.",
+        nextServiceDate: "Next service date is invalid.",
+        maintenanceStatus: "Maintenance status must be a string."
+    };
+    return messages[fieldId];
+}
 
 // Handle form submission
-const form = document.getElementById("registration-form");
-form.addEventListener("submit", async (event) => {
+
+document.getElementById("registration-form").addEventListener("submit", event => {
+
     event.preventDefault();
+    let isValid = true;
 
-    let isFormValid = true;
-
-    fieldsToValidate.forEach(fieldId => {
+    // Validate each field in the form
+    Object.keys(validators).forEach(fieldId => {
         const field = document.getElementById(fieldId);
-        const validationFn = 
-            fieldId === "regNumber" ? validateRegistrationNumber :
-            fieldId === "insuranceNumber" ? validateInsuranceNumber :
-            ["model", "company", "maintenanceStatus"].includes(fieldId) ? validateLetters :
-            ["mileage", "rentalRate"].includes(fieldId) ? validatePositiveNumber :
-            fieldId === "seatingCapacity" ? value => Number(value) > 0 :
-            validateRequired;
-        
-        if (!validateField(field, validationFn, `${fieldId.replace(/([A-Z])/g, ' $1')} is required.`)) {
-            isFormValid = false;
+        const errorMessage = generateErrorMessage(fieldId);
+        if (!validateField(field, validators[fieldId], errorMessage)) {
+            isValid = false;
         }
     });
 
+    // Validate service dates
     if (!validateServiceDates()) {
-        isFormValid = false;
+        isValid = false;
     }
 
-    if (isFormValid) {
-        try {
-            const formData = new FormData(form);
-            const response = await fetch('http://localhost:8000/addCar', {
-                method: 'POST',
-                body: formData
-            });
 
-            if (response.ok) {
-                const result = await response.json();
-                if (result.success) {
-                    showPopup("Registration Successful Redirecting to Home Page", true);
-                    setTimeout(() => {
-                        window.location.href = "/home"; // Redirect to home page
-                    }, 3000); // Delay for popup visibility
-                } else {
-                    showPopup(`Registration Failed`, false);
-                }
-            } else {
-                showPopup("Server Error. Please try again later.", false);
-            }
-        } catch (error) {
-            showPopup("Network Error. Please check your connection.", false);
-        }
+    // If form is valid, submit, else show error popup
+    if (isValid) {
+        showPopup("Form is valid. Submitting...", true);
+        event.target.submit();
+
     } else {
-        showPopup("Check your fields.", false);
+        showPopup("Please correct errors in the form.", false);
     }
-});
+});*/

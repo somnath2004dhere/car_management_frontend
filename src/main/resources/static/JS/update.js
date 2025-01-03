@@ -1,5 +1,5 @@
 // Wait for the DOM to fully load
-document.addEventListener("DOMContentLoaded", () => {
+/*document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("updation-form");
     const updateButton = document.querySelector(".update");
 
@@ -24,10 +24,15 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        // If the form is valid, show success popup
+        // If the form is valid, show success popup and submit
         if (isFormValid) {
-            document.getElementById("updation-form").submit();
-            form.reset(); // Reset form fields
+            displayPopup("Car updated successfully!", "success");
+            setTimeout(() => {
+                form.submit(); // Submit form after showing success popup
+                form.reset(); // Reset form fields
+            }, 2000);
+        } else {
+            displayPopup("Please correct the errors and try again.", "error");
         }
     });
 });
@@ -40,21 +45,20 @@ function validateField(field) {
 
     // Validation logic for specific fields
     switch (fieldName) {
-		case "regNumber":
-		    if (!/^(?=.*[A-Z])(?=.*\d)[A-Z0-9-]+$/.test(field.value)) {
-		        isValid = false;
-		        errorMessage = "Registration number must be a combination of uppercase letters and numbers (e.g., AP09AB1234 or AB1C23D).";
-		    }
-		    break;
+        case "regNumber":
+            if (!/^(?=.*[A-Z])(?=.*\d)[A-Z0-9-]+$/.test(field.value)) {
+                isValid = false;
+                errorMessage = "Registration number must be a combination of uppercase letters and numbers (e.g., AP09AB1234 or AB1C23D).";
+            }
+            break;
 
         case "model":
         case "company":
         case "maintenanceStatus":
-			if (!/^[A-Za-z ]+$/.test(field.value)) {
-			    isValid = false;
-			    errorMessage = `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} should contain only letters.`;
-			}
-
+            if (!/^[A-Za-z ]+$/.test(field.value)) {
+                isValid = false;
+                errorMessage = `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} should contain only letters.`;
+            }
             break;
 
         case "mileage":
@@ -72,12 +76,12 @@ function validateField(field) {
             }
             break;
 
-		case "insuranceNumber":
-			if (!/^INS\d{10}$/.test(field.value)) {
-			        isValid = false;
-			        errorMessage = "Insurance number must be (e.g., INS12344764 ).";
-			 }
-			 break;
+        case "insuranceNumber":
+            if (!/^INS\d{10}$/.test(field.value)) {
+                isValid = false;
+                errorMessage = "Insurance number must be (e.g., INS12344764 ).";
+            }
+            break;
 
         case "fuelType":
         case "currentStatus":
@@ -162,3 +166,4 @@ function displayPopup(message, type) {
         setTimeout(() => popup.remove(), 500);
     }, 3000);
 }
+*/

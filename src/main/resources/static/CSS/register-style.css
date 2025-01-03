@@ -5,26 +5,32 @@
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%; /* Ensures body and html take full height */
+    margin: 0; /* Removes default margins */
+}
+
 body {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: 100vh ;
     background: url('../images/back-car.webp') no-repeat center center fixed;
     background-size: cover;
     position: relative;
+    overflow: hidden; /* Prevents unnecessary scrollbars */
 }
 
 body::before {
     content: '';
-    position: absolute;
+    position: fixed; /* Covers the entire viewport */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.04);
-    z-index: -1;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.05)); /* Gradient for depth */
+    backdrop-filter: blur(2px) saturate(150%); /* Strong blur and saturation */
+    -webkit-backdrop-filter: blur(4px) saturate(150%);
+    z-index: -1; /* Ensure it remains behind content */
 }
-
 
 
 .container {
@@ -35,40 +41,45 @@ body::before {
 }
 
 .form-container {
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.5); /* Medium-dark semi-transparent background */
+    border-radius: 20px; /* Smooth rounded corners */
     padding: 30px;
     color: white;
-	box-shadow: 0 8px 32px rgba(255, 255, 255, 0.02);
-	backdrop-filter: blur(6px);
-    height: 80vh;
-    overflow-y: auto;
-	padding: 30px;
-	
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4); /* Slightly darker shadow */
+    backdrop-filter: blur(8px) saturate(150%); /* Enhanced blur and saturation */
+    -webkit-backdrop-filter: blur(8px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+    width: 490px; /* Same width for consistency */
 }
-.form-container::-webkit-scrollbar {
-     display: none; /* Hides the scrollbar for WebKit browsers */
- }
- 
- .form-content {
-	margin-top:20px;
- }
- .Heading {
-     text-align: center;
-     position: sticky;
-     top: 0;
-     z-index: 2;
- }
 
- .Heading h1 {
-     font-size: 24px;
-     color: hotpink;
-     margin: 0;
- }
+
+.form-content {
+    max-height: calc(100vh - 120px); /* Ensures no overflow issues */
+    overflow-y: auto; /* Enables scrolling within the form */
+    padding: 30px;
+}
+
+.form-content::-webkit-scrollbar {
+    display: none; /* Hides the scrollbar for WebKit browsers */
+}
+
+.Heading {
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.Heading h1 {
+    font-size: 24px;
+	color: rgba(0, 128, 255, 0.8);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+    margin: 0;
+}
 
 label {
     font-size: 16px;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(128, 255, 255, 0.9);
 }
 
 input, select {
@@ -80,13 +91,18 @@ input, select {
     outline: none;
     font-size: 14px;
     margin-bottom: 15px;
-	margin-top:15px;
+    margin-top: 15px;
     width: 100%;
 }
 
 input:focus, select:focus {
-    border-color: rgba(255, 255, 255, 0.6);
+    border-color: rgba(0, 0, 0, 0.6);
 }
+
+option{
+	background-color: black;
+}
+
 
 input.error, select.error {
     border-color: red;
@@ -96,15 +112,13 @@ input.valid, select.valid {
     border-color: green;
 }
 
-/* Error Styling */
 div.error {
     color: red;
     font-size: 12px;
-    font-weight: bold; /* Makes the error message bold */
-    margin-top: 5px; /* Adds margin above the error message */
-    margin-bottom: 10px; /* Adds margin below the error message */
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
-
 
 .register {
     padding: 12px 20px;
@@ -119,7 +133,7 @@ div.error {
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: center;
-	width: 100%;
+    width: 100%;
 }
 
 .register:hover {
@@ -134,138 +148,129 @@ div.error {
     transform: scale(1);
 }
 
-select {
-	 padding: 12px;
-	    border: 1px solid rgba(255, 255, 255, 0.3); /* Border matches input fields */
-	    border-radius: 8px;
-	    background: rgba(255, 255, 255, 0.1); /* Same semi-transparent background as inputs */
-	    color: white; /* White text */
-	    font-size: 14px;
-	    outline: none;
-	    transition: all 0.3s ease; /* Smooth transition for hover/focus */
-	    width: 100%; /* Full width inside the grid */
-	    appearance: none; /* Removes default arrow styling */
-	}
-
-	select:hover,
-	select:focus {
-	    border-color: rgba(255, 255, 255, 0.6); /* Highlight border on hover/focus */
-	    background: rgba(255, 255, 255, 0.2); /* Slightly brighter background on hover/focus */
-	    color: white;
-	}
-
-	select option {
-	    background: rgba(0, 0, 0, 0.8); /* Dark background for dropdown options */
-	    color: white; /* White text for options */
-	}
-	/* Placeholder Styling */
-	input::placeholder, select::placeholder {
-	    color: rgba(255, 255, 255, 0.6);
-	    font-style: italic;
-	}
+/* Error Message Styling */
+.error-message {
+    color: red;
+    font-size: 12px;
+    font-weight: bold; /* Makes the error message bold */
+    margin-top: 5px; /* Adds margin above the error message */
+    margin-bottom: 10px; /* Adds margin below the error message */
+}
+.error {
+    color: red;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
 
 
-	/* Responsive Styles */
-	@media screen and (max-width: 768px) {
-	    body {
-	        grid-template-columns: 1fr;
-	        grid-template-rows: auto;
-	    }
+/* Valid Input Styling */
+input.valid, select.valid {
+    border-color: green;
+}
 
-	    .container {
-	        grid-column: 1 / -1;
-	        width: 100%;
-	        padding: 10px;
-	    }
+/* Popup Styling */
+.popup {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: fadeInOut 3s ease-out;
+}
 
-	    .form-container {
-	        height: auto;
-	        padding: 20px;
-	        width: 100%;
-	    }
+.popup.success {
+    background-color: rgba(0, 255, 0, 0.8); /* Green for success */
+}
 
-	    .Heading h1 {
-	        font-size: 20px;
-	    }
+.popup.error-popup {
+    background-color: rgba(255, 0, 0, 0.8); /* Red for error */
+}
 
-	    input, select {
-	        font-size: 14px;
-	        padding: 10px;
-	    }
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(-20px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-20px); }
+}
 
-	    .register {
-	        font-size: 14px;
-	        padding: 10px;
-	    }
-	}
 
-	@media screen and (max-width: 480px) {
-	    .Heading h1 {
-	        font-size: 18px;
-	    }
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    .container {
+        grid-column: 1 / -1;
+        width: 100%;
+    }
 
-	    input, select {
-	        font-size: 12px;
-	        padding: 8px;
-	    }
+    .form-container {
+        padding: 20px;
+        width: 100%;
+    }
 
-	    .register {
-	        font-size: 12px;
-	        padding: 8px;
-	    }
-	}
-	/* Error Message Styling */
-	.error-message {
-	    color: red;
-	    font-size: 12px;
-	    font-weight: bold; /* Makes the error message bold */
-	    margin-top: 5px; /* Adds margin above the error message */
-	    margin-bottom: 10px; /* Adds margin below the error message */
-	}
-	.error {
-	    color: red;
-	    font-size: 12px;
-	    font-weight: bold;
-	    margin-top: 5px;
-	    margin-bottom: 10px;
-	}
+    .Heading h1 {
+        font-size: 20px;
+    }
 
-	
-	/* Valid Input Styling */
-	input.valid, select.valid {
-	    border-color: green;
-	}
+    input, select {
+        font-size: 14px;
+        padding: 10px;
+    }
 
-	/* Popup Styling */
-	.popup {
-	    position: fixed;
-	    top: 20px;
-	    left: 50%;
-	    transform: translateX(-50%);
-	    background-color: rgba(0, 0, 0, 0.8);
-	    color: white;
-	    padding: 15px 20px;
-	    border-radius: 5px;
-	    font-size: 16px;
-	    font-weight: bold;
-	    z-index: 1000;
-	    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-	    animation: fadeInOut 3s ease-out;
-	}
+    .register {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
 
-	.popup.success {
-	    background-color: rgba(0, 255, 0, 0.8); /* Green for success */
-	}
+@media screen and (max-width: 480px) {
+    .Heading h1 {
+        font-size: 18px;
+    }
 
-	.popup.error-popup {
-	    background-color: rgba(255, 0, 0, 0.8); /* Red for error */
-	}
+    input, select {
+        font-size: 12px;
+        padding: 8px;
+    }
 
-	@keyframes fadeInOut {
-	    0% { opacity: 0; transform: translateY(-20px); }
-	    10% { opacity: 1; transform: translateY(0); }
-	    90% { opacity: 1; transform: translateY(0); }
-	    100% { opacity: 0; transform: translateY(-20px); }
-	}
+    .register {
+        font-size: 12px;
+        padding: 8px;
+    }
+}
 
+.success-message {
+    color: green;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+input.error, select.error {
+    border: 1px solid red;
+}
+
+input.valid, select.valid {
+    border: 1px solid green;
+}
+
+.field-error {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
 

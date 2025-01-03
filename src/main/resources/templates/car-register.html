@@ -17,20 +17,27 @@
             <!-- Scrollable Form -->
             <div class="form-content">
                 <form th:object="${car}" id="registration-form" th:action="@{/register}" method="post">
-                    <label for="regNumber">Registration Number</label>
-                    <input type="text" id="regNumber" th:field="*{registrationNumber}" placeholder="Enter registration number" required>
-                    
-                    <label for="model">Model</label>
-                    <input type="text" id="model" th:field="*{model}" placeholder="Enter model" required>
-                    
-                    <label for="company">Company</label>
-                    <input type="text" id="company" th:field="*{company}" placeholder="Enter company" required>
+					<label for="regNumber">Registration Number</label>
+					   <input type="text" id="regNumber" th:field="*{registrationNumber}" placeholder="Enter registration number">
+					   <div th:if="${#fields.hasErrors('registrationNumber')}" th:errors="*{registrationNumber}" style="color:red"></div>
+
+					   <label for="model">Model</label>
+					   <input type="text" id="model" th:field="*{model}" placeholder="Enter model">
+					   <div th:if="${#fields.hasErrors('model')}" th:errors="*{model}" style="color:red"></div>
+
+					   <label for="company">Company</label>
+					   <input type="text" id="company" th:field="*{company}" placeholder="Enter company">
+					   <div th:if="${#fields.hasErrors('company')}" th:errors="*{company}" style="color:red"></div>
                     
                     <label for="mileage">Mileage</label>
                     <input type="text" id="mileage" th:field="*{mileage}" placeholder="Enter mileage" required>
+
+					<div th:if="${#fields.hasErrors('mileage')}" th:errors="*{mileage}" style="color:red"></div>
+
                     
                     <label for="seatingCapacity">Seating Capacity</label>
                     <input type="number" id="seatingCapacity" th:field="*{seatingCapacity}" placeholder="Enter seating capacity" required>
+					<div th:if="${#fields.hasErrors('seatingCapacity')}" th:errors="*{seatingCapacity}" style="color:red"></div>
                     
                     <label for="fuelType">Fuel Type</label>
                     <select id="fuelType" th:field="*{fuelType}" required>
@@ -39,6 +46,7 @@
                         <option value="Diesel">Diesel</option>
                         <option value="Electric">Electric</option>
                     </select>
+					<div th:if="${#fields.hasErrors('fuelType')}" th:errors="*{fuelType}" style="color:red"></div>
 
                     <label for="currentStatus">Current Status</label>
                     <select id="currentStatus" th:field="*{currentStatus}" required>
@@ -46,29 +54,24 @@
                         <option value="Available">Available</option>
                         <option value="Unavailable">Unavailable</option>
                     </select>
+					<div th:if="${#fields.hasErrors('currentStatus')}" th:errors="*{currentStatus}" style="color:red"></div>
 
                     <label for="insuranceNumber">Insurance Number</label>
                     <input type="text" id="insuranceNumber" th:field="*{insuranceNumber}" placeholder="Enter insurance number" required>
+					<div th:if="${#fields.hasErrors('insuranceNumber')}" th:errors="*{insuranceNumber}" style="color:red"></div>
                     
                     <label for="carCondition">Car Condition</label>
-                    <select id="carCondition" th:field="*{carCondition}" required>
+                    <select id="carCondition"  th:field="*{carCondition}" required>
                         <option value="" disabled selected>Select condition</option>
                         <option value="Excellent">Excellent</option>
                         <option value="Good">Good</option>
                         <option value="Average">Average</option>
                     </select>
-                    
+					<div th:if="${#fields.hasErrors('carCondition')}" th:errors="*{carCondition}" style="color:red"></div>
+                   
                     <label for="rentalRate">Rental Rate</label>
                     <input type="text" id="rentalRate" th:field="*{rentalRate}" placeholder="Enter rental rate" required>
-                    
-                    <label for="previousServiceDate">Previous Service Date</label>
-                    <input type="date" id="previousServiceDate" th:field="*{previousServiceDate}" required>
-                    
-                    <label for="nextServiceDate">Next Service Date</label>
-                    <input type="date" id="nextServiceDate" th:field="*{nextServiceDate}" required>
-                    
-                    <label for="maintenanceStatus">Maintenance Status</label>
-                    <input type="text" id="maintenanceStatus" th:field="*{maintenanceStatus}" placeholder="Enter maintenance status" required>
+					<div th:if="${#fields.hasErrors('rentalRate')}" th:errors="*{rentalRate}" style="color:red"></div>
                     
                     <button class="register" type="submit">Register</button>
                 </form>

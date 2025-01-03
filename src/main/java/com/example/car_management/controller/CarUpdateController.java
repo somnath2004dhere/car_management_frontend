@@ -1,83 +1,115 @@
 package com.example.car_management.controller;
 
+import com.example.car_management.model.Car;
 
-
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.car_management.model.Car;
+import java.util.Map;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-@Configuration
 @Controller
 public class CarUpdateController {
-	
-	@Bean
-    RestTemplate template() {
-		return new RestTemplate();
-	}
-    // Display the car update page
-	 @GetMapping("/update-car")
-	    public String UpdateCarPage() {
-	        return "update"; 
-	    }
-	 
-	 
-    @GetMapping("/update")
-    public String showUpdateCarPage(@RequestParam String registrationNumber, Model model) {
-    	try {
-    	String url = "http://localhost:8000/getCar/registrationnumber/" + registrationNumber;
-		HttpHeaders headers = new HttpHeaders();
-		headers.set("Content-Type", "application/json");
-		
 
-		ResponseEntity<Car> response = template().exchange(url, HttpMethod.GET, null,
-				new ParameterizedTypeReference<Car>() {
-				});
-		Car obj = response.getBody();
+    private final RestTemplate restTemplate;
 
-		System.out.println(obj);
-		if(obj == null) throw new Exception();
-	
-			model.addAttribute("car", obj);
-			return "car-update"; 
-		} catch(Exception e) {
-			model.addAttribute("errorMessage", "No Cars found.");
-			return "statuspage";
-		}
-        
+    @Autowired
+    public CarUpdateController(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
     }
     
-    @PostMapping("/update-car")
-    public String UpdateCar(@ModelAttribute Car car, Model model) {
+
+    @GetMapping("/update-car")
+    public String showCarUpdatePage(Model model) {
+        model.addAttribute("car", new Car()); // Add Car object to model for form binding
+        return "verify-reg";
+    }
+
+    @GetMapping("/update")
+    public String fetchCarDetails(@ModelAttribute Car car, Model model) {
+        String backendUrl = "http://localhost:8000/getCar/registrationnumber/" + car.getRegistrationNumber();
+
         try {
-            String url = "http://localhost:8000/updateCar";
-            System.out.println(car);
+            ResponseEntity<Car> response = restTemplate.exchange(
+                backendUrl,
+                HttpMethod.GET,
+                null,
+                Car.class
+            );
+
+            Car fetchedCar = response.getBody();
+            if (fetchedCar != null) {
+                model.addAttribute("car", fetchedCar);
+                return "car-update"; // Display update form with car details
+            }
+        } catch (HttpClientErrorException.NotFound e) {
+            // Handle 404 error and pass the backend error message to the template
+            String errorMessage = e.getResponseBodyAsString();
+            model.addAttribute("errorMessage", errorMessage);
+        } catch (Exception e) {
+            // Handle unexpected errors
+            model.addAttribute("errorMessage", "An error occurred while retrieving the car: " + e.getMessage());
+        }
+
+        return "verify-reg"; // Stay on the verification page and display the error message
+    }
+
+
+    @PostMapping("/update-car")
+    public String updateCarDetails(@ModelAttribute Car car, BindingResult result, Model model) {
+        String backendUrl = "http://localhost:8000/updateCar";
+
+        try {
             HttpHeaders headers = new HttpHeaders();
             headers.set("Content-Type", "application/json");
 
             HttpEntity<Car> request = new HttpEntity<>(car, headers);
-            ResponseEntity<Car> response = template().exchange(url, HttpMethod.PUT, request, Car.class);
 
-            Car obj = response.getBody();
-            model.addAttribute("action", "Updation");
-            return "statuspage";
+            ResponseEntity<Car> response = restTemplate.exchange(
+                backendUrl,
+                HttpMethod.PUT,
+                request,
+                Car.class
+            );
+
+            if (response.getStatusCode().is2xxSuccessful()) {
+                model.addAttribute("successMessage", "Car updated successfully!");
+                return "redirect:/";
+            }
+        } catch (HttpClientErrorException.BadRequest e) {
+            // Parse backend validation errors
+            Map<String, String> errors = parseErrors(e);
+            if (errors != null) {
+                for (Map.Entry<String, String> entry : errors.entrySet()) {
+                    result.addError(new FieldError("car", entry.getKey(), entry.getValue()));
+                }
+            }
         } catch (Exception e) {
-            model.addAttribute("errorMessage", "Car not Updated");
-            return "statuspage";
+            model.addAttribute("errorMessage", "An unexpected error occurred while updating the car: " + e.getMessage());
         }
+
+        return "car-update";
     }
 
-
+    private Map<String, String> parseErrors(HttpClientErrorException e) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.readValue(e.getResponseBodyAsString(), new TypeReference<Map<String, String>>() {});
+        } catch (Exception ex) {
+            return null;
+        }
+    }
 }
