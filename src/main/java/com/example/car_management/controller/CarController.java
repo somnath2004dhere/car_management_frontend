@@ -39,6 +39,8 @@ public class CarController {
     	String url = "http://localhost:8000/addCar";
        System.out.println(car);
 		// header is used to set data in json
+       
+       
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Content-Type", "application/json");
@@ -47,24 +49,16 @@ public class CarController {
 		HttpEntity<Car> request = new HttpEntity<>(car, headers);// employee obj
 
 		// Send the POST request
-//	        try {
 		ResponseEntity<Car> response = restTemplate().exchange(url, HttpMethod.POST, request, Car.class);
 
 		// REQUST TO GET THE RESPONCE
 		Car obj = null;
 		obj = response.getBody();// ACESS THE RESPONCE
 
-//	        }
-//	        catch(HttpClientErrorException e) {
-//	        	      	
-//	        	ObjectMapper objectMapper = new ObjectMapper();
-//	            JsonNode rootNode = objectMapper.readTree(e.getResponseBodyAsString());
-//	            String errorMessage = rootNode.path("message").asText();
-//	        	model.addAttribute("errorMessage", errorMessage);
-//	        		return "statuspage";
-//	       }
 
-		
+
+       if(obj==null) throw new Exception();
+		   
 			model.addAttribute("action", "Registration");
 			return "statuspage";
 		}

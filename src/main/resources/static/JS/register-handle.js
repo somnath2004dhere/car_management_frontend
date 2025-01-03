@@ -131,7 +131,7 @@ nextServiceDateField.addEventListener("blur", validateServiceDates);
 
 // Handle form submission
 const form = document.getElementById("registration-form");
-form.addEventListener("submit", (event) => {
+form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     let isFormValid = true;
@@ -156,7 +156,29 @@ form.addEventListener("submit", (event) => {
     }
 
     if (isFormValid) {
-         document.getElementById("registration-form").submit();
+        try {
+            const formData = new FormData(form);
+            const response = await fetch('http://localhost:8000/addCar', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                if (result.success) {
+                    showPopup("Registration Successful Redirecting to Home Page", true);
+                    setTimeout(() => {
+                        window.location.href = "/home"; // Redirect to home page
+                    }, 3000); // Delay for popup visibility
+                } else {
+                    showPopup(`Registration Failed`, false);
+                }
+            } else {
+                showPopup("Server Error. Please try again later.", false);
+            }
+        } catch (error) {
+            showPopup("Network Error. Please check your connection.", false);
+        }
     } else {
         showPopup("Check your fields.", false);
     }

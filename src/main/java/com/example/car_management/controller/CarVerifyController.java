@@ -43,6 +43,8 @@ public class CarVerifyController {
     		Car obj = response.getBody();
 
     		System.out.println(obj);
+    		
+    	    if(obj == null) throw new Exception();
     	
     			model.addAttribute("car", obj);
     			return "car"; 
