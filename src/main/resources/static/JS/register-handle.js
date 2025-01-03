@@ -1,5 +1,5 @@
 // Utility function to display error messages
-function validateField(field, validationFn, errorMessage) {
+/*function validateField(field, validationFn, errorMessage) {
     const errorElementId = `${field.id}-error`;
     document.getElementById(errorElementId)?.remove();
 
@@ -146,4 +146,4 @@ document.getElementById("registration-form").addEventListener("submit", event =>
     } else {
         showPopup("Please correct errors in the form.", false);
     }
-});
+});*/

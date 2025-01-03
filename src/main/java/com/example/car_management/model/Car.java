@@ -1,58 +1,53 @@
 package com.example.car_management.model;
 
+import java.math.BigDecimal;
 import java.sql.Date;
+import java.time.LocalDate;
 
 import org.springframework.stereotype.Component;
 
 @Component
 public class Car {
    
-    private int id;
+    private int carId;
     private String registrationNumber;
     private String model;
     private String company;
-    private double maileage; 
+    private BigDecimal mileage; 
     private int seatingCapacity;
     private String fuelType;
     private String insuranceNumber;
     private String carCondition;
     private String currentStatus;
-    private Date previousServiceDate;
-    private Date nextServiceDate;
-    private String maintenanceStatus;
-    private double rentalRate;
+    private BigDecimal rentalRate;
 
     // Default constructor
     public Car() {}
 
     // Parameterized constructor
-    public Car(int id, String registrationNumber, String model, String company, double maileage, 
+    public Car(int carId, String registrationNumber, String model, String company, BigDecimal mileage, 
                int seatingCapacity, String fuelType, String insuranceNumber, String carCondition, 
-               String currentStatus, double rentalRate, Date previousServiceDate, 
-               Date nextServiceDate, String maintenanceStatus) {
-        this.id = id;
+               String currentStatus, BigDecimal rentalRate) {
+        this.carId = carId;
         this.registrationNumber = registrationNumber;
         this.model = model;
         this.company = company;
-        this.maileage = maileage;
+        this.mileage = mileage;
         this.seatingCapacity = seatingCapacity;
         this.fuelType = fuelType;
         this.insuranceNumber = insuranceNumber;
         this.carCondition = carCondition;
         this.currentStatus = currentStatus;
         this.rentalRate = rentalRate;
-        this.previousServiceDate = previousServiceDate;
-        this.nextServiceDate = nextServiceDate;
-        this.maintenanceStatus = maintenanceStatus;
     }
 
     // Getters and setters for all fields
-    public int getId() {
-        return id;
+    public int getCarId() {
+        return carId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCarId(int carId) {
+        this.carId = carId;
     }
 
     public String getRegistrationNumber() {
@@ -79,12 +74,12 @@ public class Car {
         this.company = company;
     }
 
-    public double getMaileage() {
-        return maileage;
+    public BigDecimal getMileage() {
+        return mileage;
     }
 
-    public void setMaileage(double maileage) { // Ensure it's a double
-        this.maileage = maileage;
+    public void setMileage(BigDecimal mileage) { 
+        this.mileage = mileage;
     }
 
     public int getSeatingCapacity() {
@@ -127,44 +122,19 @@ public class Car {
         this.currentStatus = currentStatus;
     }
 
-    public double getRentalRate() {
+    public BigDecimal getRentalRate() {
         return rentalRate;
     }
 
-    public void setRentalRate(double rentalRate) {
+    public void setRentalRate(BigDecimal rentalRate) {
         this.rentalRate = rentalRate;
-    }
-
-    public Date getPreviousServiceDate() {
-        return previousServiceDate;
-    }
-
-    public void setPreviousServiceDate(Date previousServiceDate) {
-        this.previousServiceDate = previousServiceDate;
-    }
-
-    public Date getNextServiceDate() {
-        return nextServiceDate;
-    }
-
-    public void setNextServiceDate(Date nextServiceDate) {
-        this.nextServiceDate = nextServiceDate;
-    }
-
-    public String getMaintenanceStatus() {
-        return maintenanceStatus;
-    }
-
-    public void setMaintenanceStatus(String maintenanceStatus) {
-        this.maintenanceStatus = maintenanceStatus;
     }
 
     @Override
     public String toString() {
-        return "Car [id=" + id + ", registrationNumber=" + registrationNumber + ", model=" + model + ", company="
-                + company + ", maileage=" + maileage + ", seatingCapacity=" + seatingCapacity + ", fuelType=" + fuelType
+        return "Car [id=" + carId + ", registrationNumber=" + registrationNumber + ", model=" + model + ", company="
+                + company + ", mileage=" + mileage + ", seatingCapacity=" + seatingCapacity + ", fuelType=" + fuelType
                 + ", insuranceNumber=" + insuranceNumber + ", carCondition=" + carCondition + ", currentStatus="
-                + currentStatus + ", previousServiceDate=" + previousServiceDate + ", nextServiceDate="
-                + nextServiceDate + ", maintenanceStatus=" + maintenanceStatus + ", rentalRate=" + rentalRate + "]";
+                + currentStatus + ", rentalRate=" + rentalRate + "]";
     }
 }
