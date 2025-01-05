@@ -18,8 +18,7 @@
             <div class="form-content">
                 <!-- Thymeleaf Form Binding -->
                 <form th:action="@{/update-car}" th:object="${car}" method="post" id="updation-form">
-               <label for="carId">Car Id</label>
-                  <input type="text" id="carId" th:field="*{carId}" placeholder="Enter Id" readonly>
+                   <input type="hidden" th:field="*{carId}">
 
                     <label for="regNumber">Registration Number</label>
                     <input type="text" id="regNumber" th:field="*{registrationNumber}" placeholder="Enter registration number" readonly>

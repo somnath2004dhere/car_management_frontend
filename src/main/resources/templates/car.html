@@ -5,74 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Details</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        /* Background and layout styling */
-        body {
-            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Arial', sans-serif;
-        }
-        .container {
-            max-width: 600px;
-        }
-
-        /* Card styling */
-        .car-detail-card {
-            background-color: #ffffff;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .car-detail-card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .card-header {
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
-            color: #ffffff;
-            text-align: center;
-            padding: 15px 0;
-            font-size: 1.5rem;
-        }
-
-        .list-group-item {
-            border: none;
-            font-size: 1rem;
-            padding: 12px 20px;
-            background-color: #f9f9f9;
-        }
-
-        .list-group-item:nth-child(odd) {
-            background-color: #ffffff;
-        }
-
-        .list-group-item strong {
-            color: #2d3e50;
-        }
-
-        /* Special field styling */
-        .car-condition {
-            font-weight: bold;
-            color: #4caf50;
-        }
-        .status-pending {
-            color: #e53935;
-            font-weight: bold;
-        }
-
-        /* Footer styling */
-        .footer {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #666;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/car.css}">
 </head>
 <body>
     <div class="container">
@@ -81,27 +14,34 @@
             <strong>Error:</strong> No car details available.
         </div>
 
-        <!-- Card for Car Details -->
-        <div th:if="${car != null}" class="card car-detail-card">
-            <div class="card-header">
-                🚗 Car Information
+        <h3>🚗 Car Information</h3>
+
+        <!-- Grid Layout -->
+        <div th:if="${car != null}" class="car-details-grid">
+            <!-- Row 1: Basic Info -->
+            <div class="car-info glassmorphic">
+                <ul>
+                    <li><strong>Model:</strong> <span th:text="${car.model ?: 'N/A'}">Tesla Model S</span></li>
+                    <li><strong>Company:</strong> <span th:text="${car.company ?: 'N/A'}">Tesla</span></li>
+                    <li><strong>Fuel Type:</strong> <span th:text="${car.fuelType ?: 'N/A'}">Electric</span></li>
+                    <li><strong>Seating Capacity:</strong> <span th:text="${car.seatingCapacity ?: 'N/A'}">5</span></li>
+                    <li><strong>Mileage (km/l):</strong> <span th:text="${car.mileage ?: 'N/A'}">0</span></li>
+                </ul>
             </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item"><strong>Model:</strong> <span th:text="${car.model ?: 'N/A'}">Tesla Model S</span></li>
-                <li class="list-group-item"><strong>Company:</strong> <span th:text="${car.company ?: 'N/A'}">Tesla</span></li>
-                <li class="list-group-item"><strong>Registration Number:</strong> <span th:text="${car.registrationNumber ?: 'N/A'}">XYZ12345</span></li>
-                <li class="list-group-item"><strong>Fuel Type:</strong> <span th:text="${car.fuelType ?: 'N/A'}">Electric</span></li>
-                <li class="list-group-item"><strong>Seating Capacity:</strong> <span th:text="${car.seatingCapacity ?: 'N/A'}">5</span></li>
-                <li class="list-group-item"><strong>Mileage (km/l):</strong> <span th:text="${car.mileage ?: 'N/A'}">0</span></li>
-                <li class="list-group-item"><strong>Insurance Number:</strong> <span th:text="${car.insuranceNumber ?: 'N/A'}">INS-123456</span></li>
-                <li class="list-group-item"><strong>Car Condition:</strong> <span class="car-condition" th:text="${car.carCondition ?: 'N/A'}">Excellent</span></li>
-                <li class="list-group-item"><strong>Current Status:</strong> <span th:text="${car.currentStatus ?: 'N/A'}">Available</span></li>
-                <li class="list-group-item"><strong>Rental Rate (per day):</strong> ₹<span th:text="${car.rentalRate ?: 'N/A'}">5000</span></li>
-            </ul>
-        </div>
-        <!-- Footer -->
-        <div class="footer">
-            © 2024 Your Car Management System
+
+            <!-- Row 2: Car Model -->
+            <div class="car-model glassmorphic">
+                <iframe src="/car-model.html" class="car-model-frame"></iframe>
+            </div>
+
+            <!-- Row 3: Additional Info -->
+            <div class="car-status glassmorphic">
+                <ul>
+                    <li><strong>Car Condition:</strong> <span th:text="${car.carCondition ?: 'N/A'}">Excellent</span></li>
+                    <li><strong>Current Status:</strong> <span th:text="${car.currentStatus ?: 'N/A'}">Available</span></li>
+                    <li><strong>Rental Rate (per day):</strong> ₹<span th:text="${car.rentalRate ?: 'N/A'}">5000</span></li>
+                </ul>
+            </div>
         </div>
     </div>
 
