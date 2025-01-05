@@ -2,14 +2,12 @@ package com.example.car_management.controller;
 
 import com.example.car_management.model.Car;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
@@ -31,7 +29,7 @@ public class CarVerifyController {
 
 
     @GetMapping("/getCar")
-    public String getCar(@ModelAttribute("car") Car car, Model model) {
+    public String getCar(@ModelAttribute Car car, Model model) {
         String registrationNumber = car.getRegistrationNumber(); // Extract registration number
         String backendUrl = "http://localhost:8000/getCar/registrationnumber/" + registrationNumber;
 
@@ -42,6 +40,7 @@ public class CarVerifyController {
                 null,
                 Car.class
             );
+
 
             Car fetchedCar = response.getBody();
             if (fetchedCar != null) {
@@ -57,6 +56,7 @@ public class CarVerifyController {
         }
 
         return "search-car"; // Stay on the search page with the error message
+
     }
 
 

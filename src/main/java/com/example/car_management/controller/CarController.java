@@ -27,9 +27,10 @@ public class CarController {
     }
 
     @PostMapping("/register")
-    public String submitCarForm(@ModelAttribute("car") Car car, BindingResult result, Model model) {
+    public String submitCarForm(@ModelAttribute Car car, BindingResult result, Model model) {
         String BASE_URL = "http://localhost:8000"; // Define backend base URL
         RestTemplate restTemplate = new RestTemplate(); // Create RestTemplate instance
+
 
         try {
             // Call backend API to add the car
@@ -55,6 +56,7 @@ public class CarController {
                 return "car-register";
             }
 
+
             // Map backend errors to BindingResult
             for (Map.Entry<String, String> entry : errors.entrySet()) {
                 String field = entry.getKey();
@@ -69,6 +71,7 @@ public class CarController {
 
         // Stay on the registration page and display validation errors
         return "car-register";
+
     }
 
 }

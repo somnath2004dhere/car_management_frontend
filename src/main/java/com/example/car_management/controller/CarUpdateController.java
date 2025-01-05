@@ -1,6 +1,7 @@
 package com.example.car_management.controller;
 
 import com.example.car_management.model.Car;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -13,7 +14,6 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
@@ -30,6 +30,7 @@ public class CarUpdateController {
     public CarUpdateController(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
+    
 
     @GetMapping("/update-car")
     public String showCarUpdatePage(Model model) {
@@ -38,7 +39,7 @@ public class CarUpdateController {
     }
 
     @GetMapping("/update")
-    public String fetchCarDetails(@ModelAttribute("car") Car car, Model model) {
+    public String fetchCarDetails(@ModelAttribute Car car, Model model) {
         String backendUrl = "http://localhost:8000/getCar/registrationnumber/" + car.getRegistrationNumber();
 
         try {
@@ -68,7 +69,7 @@ public class CarUpdateController {
 
 
     @PostMapping("/update-car")
-    public String updateCarDetails(@ModelAttribute("car") Car car, BindingResult result, Model model) {
+    public String updateCarDetails(@ModelAttribute Car car, BindingResult result, Model model) {
         String backendUrl = "http://localhost:8000/updateCar";
 
         try {

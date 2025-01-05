@@ -121,7 +121,9 @@ function generateErrorMessage(fieldId) {
 }
 
 // Handle form submission
+
 document.getElementById("registration-form").addEventListener("submit", event => {
+
     event.preventDefault();
     let isValid = true;
 
@@ -139,10 +141,12 @@ document.getElementById("registration-form").addEventListener("submit", event =>
         isValid = false;
     }
 
+
     // If form is valid, submit, else show error popup
     if (isValid) {
         showPopup("Form is valid. Submitting...", true);
         event.target.submit();
+
     } else {
         showPopup("Please correct errors in the form.", false);
     }

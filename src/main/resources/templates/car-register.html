@@ -31,7 +31,9 @@
                     
                     <label for="mileage">Mileage</label>
                     <input type="text" id="mileage" th:field="*{mileage}" placeholder="Enter mileage" required>
+
 					<div th:if="${#fields.hasErrors('mileage')}" th:errors="*{mileage}" style="color:red"></div>
+
                     
                     <label for="seatingCapacity">Seating Capacity</label>
                     <input type="number" id="seatingCapacity" th:field="*{seatingCapacity}" placeholder="Enter seating capacity" required>

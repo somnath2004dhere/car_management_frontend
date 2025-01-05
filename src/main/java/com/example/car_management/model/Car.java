@@ -1,25 +1,31 @@
 package com.example.car_management.model;
 
+
 import java.math.BigDecimal;
-import java.sql.Date;
-import java.time.LocalDate;
+
 
 import org.springframework.stereotype.Component;
 
+
 @Component
 public class Car {
+
    
     private int carId;
+
     private String registrationNumber;
     private String model;
     private String company;
     private BigDecimal mileage; 
     private int seatingCapacity;
     private String fuelType;
+
     private String insuranceNumber;
     private String carCondition;
+
     private String currentStatus;
     private BigDecimal rentalRate;
+
 
     // Default constructor
     public Car() {}
