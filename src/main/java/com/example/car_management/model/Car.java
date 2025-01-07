@@ -32,7 +32,7 @@ public class Car {
 
 
 
-    private int seatingCapacity;
+    private Integer seatingCapacity;
 
     private String fuelType; 
 
@@ -105,11 +105,11 @@ public class Car {
         }
     }
 
-    public int getSeatingCapacity() {
+    public Integer getSeatingCapacity() {
         return seatingCapacity;
     }
 
-    public void setSeatingCapacity(int seatingCapacity) {
+    public void setSeatingCapacity(Integer seatingCapacity) {
         this.seatingCapacity = seatingCapacity;
     }
 
