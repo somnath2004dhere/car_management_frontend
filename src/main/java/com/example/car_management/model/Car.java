@@ -2,52 +2,64 @@ package com.example.car_management.model;
 
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 
 import org.springframework.stereotype.Component;
 
 
+
+
+
+
+
 @Component
 public class Car {
 
-   
+
     private int carId;
 
-    private String registrationNumber;
-    private String model;
-    private String company;
-    private BigDecimal mileage; 
-    private int seatingCapacity;
-    private String fuelType;
 
+    private String registrationNumber;
+
+
+    private String model;
+
+    private String company;
+
+
+    private BigDecimal mileage;
+
+
+
+    private int seatingCapacity;
+
+    private String fuelType; 
+
+  
     private String insuranceNumber;
+
     private String carCondition;
 
+
     private String currentStatus;
+
     private BigDecimal rentalRate;
+    
 
+    private String color;
+    
+    private String location;
 
-    // Default constructor
+    
+
+    
+    
+
     public Car() {}
 
-    // Parameterized constructor
-    public Car(int carId, String registrationNumber, String model, String company, BigDecimal mileage, 
-               int seatingCapacity, String fuelType, String insuranceNumber, String carCondition, 
-               String currentStatus, BigDecimal rentalRate) {
-        this.carId = carId;
-        this.registrationNumber = registrationNumber;
-        this.model = model;
-        this.company = company;
-        this.mileage = mileage;
-        this.seatingCapacity = seatingCapacity;
-        this.fuelType = fuelType;
-        this.insuranceNumber = insuranceNumber;
-        this.carCondition = carCondition;
-        this.currentStatus = currentStatus;
-        this.rentalRate = rentalRate;
-    }
+    // Getters and setters
 
-    // Getters and setters for all fields
     public int getCarId() {
         return carId;
     }
@@ -84,8 +96,13 @@ public class Car {
         return mileage;
     }
 
-    public void setMileage(BigDecimal mileage) { 
-        this.mileage = mileage;
+
+    public void setMileage(BigDecimal mileage) {
+        if (mileage != null) {
+            this.mileage = mileage.setScale(2, RoundingMode.HALF_UP);
+        } else {
+            this.mileage = null;
+        }
     }
 
     public int getSeatingCapacity() {
@@ -133,14 +150,36 @@ public class Car {
     }
 
     public void setRentalRate(BigDecimal rentalRate) {
-        this.rentalRate = rentalRate;
+        if (rentalRate != null) {
+            this.rentalRate = rentalRate.setScale(2, RoundingMode.HALF_UP); // Rounds to 2 decimal places
+        } else {
+            this.rentalRate = null;
+        }
     }
+    
+    public String getColor() {
+		return color;
+	}
 
-    @Override
-    public String toString() {
-        return "Car [id=" + carId + ", registrationNumber=" + registrationNumber + ", model=" + model + ", company="
-                + company + ", mileage=" + mileage + ", seatingCapacity=" + seatingCapacity + ", fuelType=" + fuelType
-                + ", insuranceNumber=" + insuranceNumber + ", carCondition=" + carCondition + ", currentStatus="
-                + currentStatus + ", rentalRate=" + rentalRate + "]";
-    }
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+
+    
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+
+
+	
+    
+    
+
 }

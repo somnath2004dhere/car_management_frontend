@@ -40,8 +40,12 @@
                     <li><strong>Car Condition:</strong> <span th:text="${car.carCondition ?: 'N/A'}">Excellent</span></li>
                     <li><strong>Current Status:</strong> <span th:text="${car.currentStatus ?: 'N/A'}">Available</span></li>
                     <li><strong>Rental Rate (per day):</strong> ₹<span th:text="${car.rentalRate ?: 'N/A'}">5000</span></li>
+                     <li><strong>Color:</strong> <span th:text="${car.color ?: 'N/A'}">White</span></li>
+                     <li><strong>Location:</strong> <span th:text="${car.location ?: 'N/A'}">Hyderabad</span></li>
                 </ul>
             </div>
+            
+            <button>Book The Car</button>
         </div>
     </div>
 
