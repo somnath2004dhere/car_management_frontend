@@ -14,10 +14,10 @@ import com.example.car_management.model.Car;
 public class CarSearchController {
 
 	
-	  @GetMapping("/search")
+	  @GetMapping("/filter")
 	  public String filter(Model model) {
 		  model.addAttribute("cars", new ArrayList<Car>());
-		  return "car-search";
+		  return "car-filter";
 	  }
 	  
 	 
