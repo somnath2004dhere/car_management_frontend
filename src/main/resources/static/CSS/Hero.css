@@ -1,11 +1,12 @@
 /* General Grid Setup for Hero Section */
 .Hero {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Two equal columns for left and right sections */
+    grid-template-columns: 1fr 1fr;
     align-items: center;
     gap: 20px;
     padding: 20px;
-    background: linear-gradient(135deg, #f0f8ff, #e6e6fa); /* Subtle gradient for Hero background */
+    background: linear-gradient(135deg, #f0f8ff, #e6e6fa);
+    min-height: 80vh;
 }
 
 /* Left Hero Section */
@@ -18,12 +19,12 @@
 
 .left-hero h1 {
     font-size: 3rem;
-    color: #4b0082; /* Rich indigo */
+    color: #4b0082;
 }
 
 .left-hero p {
     font-size: 1.2rem;
-    color: #555; /* Neutral gray for contrast */
+    color: #555;
 }
 
 .cta-buttons {
@@ -40,14 +41,14 @@
 }
 
 .btn {
-    background-color: #6a5acd; /* Soft slate blue */
+    background-color: #6a5acd;
     color: #fff;
     border: none;
 }
 
 .btn-secondary {
-    background-color: #e0e0f8; /* Light lavender */
-    color: #4b0082; /* Matches main text color */
+    background-color: #e0e0f8;
+    color: #4b0082;
     border: 2px solid #6a5acd;
 }
 
@@ -59,14 +60,14 @@
 /* Right Hero Section */
 .right-hero {
     position: relative;
-    background: linear-gradient(135deg, #6a5acd, #483d8b); /* Gradient from slate blue to dark slate blue */
-    height: 440px; /* Adjust as needed */
+    background: linear-gradient(135deg, #6a5acd, #483d8b);
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: visible; /* Allows content to go outside the container */
+    overflow: visible;
     border-radius: 10px;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .background-color {
@@ -78,18 +79,7 @@
 
 .car-hero {
     position: relative;
-    z-index: 2; /* Ensures the image appears above the background */
-    width: 150%; /* Makes the image larger than the background */
-    transform: translateY(-60px) translateX(-100px); /* Move the image upwards and to the left */
-}
-
-/* Features List */
-.features-list {
-    list-style: none;
-    padding: 0;
-    color: #4b0082;
-}
-
-.features-list li {
-    margin-top: 10px;
+    z-index: 2;
+    width: 150%;
+    transform: translateY(-60px) translateX(-100px);
 }

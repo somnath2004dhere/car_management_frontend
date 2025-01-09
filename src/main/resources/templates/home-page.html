@@ -28,22 +28,41 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <div class="Hero">
-		<div class="left-hero">
-		    <h1>Effortless Car Management</h1>
-		    <p>Register, update, and manage your cars with ease on our user-friendly platform. Everything you need in one place!</p>
-		    <div class="cta-buttons">
-		        <a th:href="@{/car-register}" class="btn">Register Your Car</a>
-		        <a th:href="@{/search-car}" class="btn-secondary">Find a Car</a>
-		    </div>
-		</div>
-        <div class="right-hero">
-            <div class="background-color">
-                  <img class="car-hero" th:src="@{/images/thar.png}" alt="Thar Car">
+    <div class="main-content">
+        <!-- Hero Section -->
+        <div class="Hero">
+            <div class="left-hero">
+                <h1>Effortless Car Management</h1>
+                <p>Register, update, and manage your cars with ease on our user-friendly platform. Everything you need in one place!</p>
+                <div class="cta-buttons">
+                    <a th:href="@{/car-register}" class="btn">Register Your Car</a>
+                    <a th:href="@{/search-car}" class="btn-secondary">Find a Car</a>
+                </div>
+            </div>
+            <div class="right-hero">
+                <div class="background-color">
+                    <img class="car-hero" th:src="@{/images/thar.png}" alt="Thar Car">
+                </div>
             </div>
         </div>
     </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Car Management System. All rights reserved.</p>
+            <ul class="social-links">
+                <li><a href="https://facebook.com" target="_blank">
+                    <img th:src="@{/images/facebook-icon.png}" alt="Facebook">
+                </a></li>
+                <li><a href="https://twitter.com" target="_blank">
+                    <img th:src="@{/images/twitter-icon.png}" alt="Twitter">
+                </a></li>
+                <li><a href="https://instagram.com" target="_blank">
+                    <img th:src="@{/images/instagram-icon.png}" alt="Instagram">
+                </a></li>
+            </ul>
+        </div>
+    </footer>
 
     <script src="/JS/navbar.js"></script>
 </body>
