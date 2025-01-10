@@ -49,7 +49,6 @@ body::before {
 	    -webkit-backdrop-filter: blur(5px) saturate(180%); /* For WebKit browsers */
 	    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
 	    
-	
 	    
 }
 
@@ -99,23 +98,6 @@ input, select {
 input:focus, select:focus {
     border-color: rgba(255, 255, 255, 0.6);
 }
-
-input.error, select.error {
-    border-color: red;
-}
-
-input.valid, select.valid {
-    border-color: green;
-}
-
-div.error {
-    color: red;
-    font-size: 12px;
-    font-weight: bold;
-    margin-top: 5px;
-    margin-bottom: 10px;
-}
-
 
 .update {
     padding: 12px 20px;
@@ -167,7 +149,6 @@ div.error {
     transform: translateY(0); /* Return to original position */
 }
 
-
 select {
 	 padding: 12px;
 	    border: 1px solid rgba(255, 255, 255, 0.3); /* Border matches input fields */
@@ -198,11 +179,49 @@ select {
 	    font-style: italic;
 	}
 
-	.popup {
-	    transition: opacity 0.3s ease;
+	.prev-page {
+	    display: flex;
+	    justify-content: space-around;
+	    margin-top: 25px;
 	}
 
+	.prev-page li {
+	    display: flex; /* Use flexbox for list items */
+	    flex-direction: column; /* Stack icon and text vertically */
+	    align-items: center; /* Center items horizontally */
+	    transition: transform 0.3s ease, color 0.4s ease; /* Smooth transition for scaling and color */
+	}
 
+	.prev-page a {
+	    color: rgba(255, 126, 179, 0.8); /* Match link color with the "update" button gradient */
+	    text-decoration: none; /* Remove underline */
+	    text-align: center; /* Center text */
+	}
+
+	.prev-page a i {
+	    margin-bottom: 5px; /* Space between icon and text */
+	    font-size: 24px; /* Adjust icon size */
+	}
+
+	.prev-page a span {
+	    font-size: 14px; /* Adjust text size */
+	    display: block; /* Ensure the text is treated as a block element */
+	}
+
+	/* Hover Effects */
+	.prev-page li:hover {
+	    transform: scale(1.1); /* Scale up the entire list item */
+	}
+
+	.prev-page li:hover a {
+	    color: rgba(255, 78, 120, 1); /* Darker gradient on hover */
+	}
+
+	.prev-page li:hover a i {
+	    color: rgba(255, 36, 77, 1); /* Change icon color on hover */
+	    transform: scale(1.2); /* Scale up the icon */
+	}
+	
 	@media screen and (max-width: 1200px) {
 	    .form-container {
 	        width: 90%;
@@ -260,12 +279,3 @@ select {
 	        padding: 8px;
 	    }
 	}
-
-	.error {
-	    color: red;
-	    font-size: 12px;
-	    font-weight: bold;
-	    margin-top: 5px;
-	}
-
-
