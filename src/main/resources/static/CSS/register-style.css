@@ -104,21 +104,7 @@ option{
 }
 
 
-input.error, select.error {
-    border-color: red;
-}
 
-input.valid, select.valid {
-    border-color: green;
-}
-
-div.error {
-    color: red;
-    font-size: 12px;
-    font-weight: bold;
-    margin-top: 5px;
-    margin-bottom: 10px;
-}
 
 .register {
     padding: 12px 20px;
@@ -148,52 +134,6 @@ div.error {
     transform: scale(1);
 }
 
-/* Error Message Styling */
-.error-message {
-    color: red;
-    font-size: 12px;
-    font-weight: bold; /* Makes the error message bold */
-    margin-top: 5px; /* Adds margin above the error message */
-    margin-bottom: 10px; /* Adds margin below the error message */
-}
-.error {
-    color: red;
-    font-size: 12px;
-    font-weight: bold;
-    margin-top: 5px;
-    margin-bottom: 10px;
-}
-
-
-/* Valid Input Styling */
-input.valid, select.valid {
-    border-color: green;
-}
-
-/* Popup Styling */
-.popup {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 15px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    z-index: 1000;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    animation: fadeInOut 3s ease-out;
-}
-
-.popup.success {
-    background-color: rgba(0, 255, 0, 0.8); /* Green for success */
-}
-
-.popup.error-popup {
-    background-color: rgba(255, 0, 0, 0.8); /* Red for error */
-}
 
 @keyframes fadeInOut {
     0% { opacity: 0; transform: translateY(-20px); }
@@ -201,6 +141,7 @@ input.valid, select.valid {
     90% { opacity: 1; transform: translateY(0); }
     100% { opacity: 0; transform: translateY(-20px); }
 }
+
 
 
 /* Responsive Styles */
@@ -246,31 +187,43 @@ input.valid, select.valid {
     }
 }
 
-.success-message {
-    color: green;
-    font-size: 14px;
-    margin-top: 10px;
-    text-align: center;
+.prev-page {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 25px;
 }
 
-.error-message {
-    color: red;
-    font-size: 14px;
-    margin-top: 10px;
-    text-align: center;
+.prev-page li {
+    display: flex; /* Use flexbox for list items */
+    flex-direction: column; /* Stack icon and text vertically */
+    align-items: center; /* Center items horizontally */
+	transition: transform 0.3s ease; /* Smooth transition for scaling */
 }
 
-input.error, select.error {
-    border: 1px solid red;
+.prev-page a {
+    color: rgba(0, 128, 255, 0.8); /* Match link color with the rest of the form */
+    text-decoration: none; /* Remove underline */
+    text-align: center; /* Center text */
 }
 
-input.valid, select.valid {
-    border: 1px solid green;
+.prev-page a i {
+    margin-bottom: 5px; /* Space between icon and text */
+    font-size: 24px; /* Adjust icon size */
 }
 
-.field-error {
-            color: red;
-            font-size: 0.9em;
-            margin-top: 5px;
-        }
+.prev-page a span {
+    font-size: 14px; /* Adjust text size */
+    display: block; /* Ensure the text is treated as a block element */
+}
+
+/* Hover Effects */
+.prev-page li:hover {
+    transform: scale(1.1); /* Scale up the entire list item */
+}
+
+.prev-page li:hover a i {
+    transform: scale(1.2); /* Scale up the icon */
+}
+
+
 
