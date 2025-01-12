@@ -9,5 +9,7 @@ public class HomePageController {
     @GetMapping("/")
     public String showHomePage() {
         return "home-page"; // Maps to home-page.html
+        
+       
     }
 }
