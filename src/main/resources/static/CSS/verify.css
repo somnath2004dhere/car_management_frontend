@@ -222,3 +222,62 @@ body {
         padding: 6px 12px;
     }
 }
+
+.prev-page {
+    display: flex; /* Use flexbox for layout */
+    flex-direction: row; /* Align items horizontally */
+    justify-content: space-around;; /* Center items horizontally */
+    gap: 15px; /* Add spacing between items */
+    margin-top: 25px;
+    list-style: none; /* Remove bullet points from the list */
+    padding: 0; /* Remove extra padding */
+}
+
+
+.prev-page li {
+    display: flex; /* Use flexbox */
+    align-items: center; /* Align icon and text in the center vertically */
+    justify-content: center; /* Center content horizontally */
+    transition: transform 0.3s ease; /* Smooth transition for scaling */
+}
+
+
+.prev-page a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none; /* Remove underline from links */
+    color: rgba(59, 130, 246, 0.8); /* Initial icon color */
+    font-size: 24px; /* Icon size */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+    padding: 10px;
+    border-radius: 10px; /* Add rounded corners for hover effect */
+}
+
+.prev-page a i {
+    margin-bottom: 5px; /* Space between icon and text */
+    font-size: 24px; /* Adjust icon size */
+}
+
+.prev-page a span {
+    font-size: 14px; /* Adjust text size */
+    display: block; /* Ensure the text is treated as a block element */
+}
+
+/* Hover Effects */
+.prev-page li:hover {
+    transform: scale(1.1); /* Scale up the entire list item */
+}
+
+.prev-page li:hover a i {
+    transform: scale(1.2); /* Scale up the icon */
+}
+
+
+.prev-page a:hover {
+    background-color: rgba(59, 130, 246, 0.1); /* Light blue background on hover */
+    color: #3b82f6; /* Brighter blue for icon */
+    transform: scale(1.1); /* Slightly enlarge the element */
+    box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3); /* Add a soft shadow */
+}
+

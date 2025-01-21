@@ -5,31 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verify Car</title>
     <link rel="stylesheet" th:href="@{/css/verify.css}">
-        <link rel="stylesheet" th:href="@{/css/navbar.css}">
-     <link rel="stylesheet" th:href="@{/css/Hero.css}">
-    <link rel="stylesheet" th:href="@{/css/Card-car.css}">
-    <link rel="stylesheet" th:href="@{/css/footer.css}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
- <!-- Navbar -->
-    <nav class="navbar">
-        <div class="logo">
-            <img th:src="@{/images/logo.png}" alt="Car Management Logo">
-        </div>
-        <ul class="nav-links">
-            <li><a th:href="@{/}">Home</a></li>
-            <li><a th:href="@{/car-register}">Register</a></li>
-            <li><a th:href="@{/update-car}" class="home-link">Update</a></li>
-            <li><a th:href="@{/filter}" >Find</a></li>
-            <li><a th:href="@{/contact}" >Contact</a></li>
-            <li><a th:href="@{/about}">About</a></li>
-        </ul>
-        <div class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </nav>
     <div class="verify-container">
         <!-- Left Section -->
         <div class="left-section">
@@ -49,6 +27,29 @@
                     <p th:text="${errorMessage}"></p>
                 </div>
                 <button type="submit">Confirm</button>
+				<ul class="prev-page">
+				    <li>
+				        <a th:href="@{/}">
+				            <div class="icon-text">
+				                <i class="fas fa-home"></i>
+				            </div>
+				        </a>
+				    </li>
+					<li>
+					    <a th:href="@{/car-register}">
+					         <div class="icon-text">
+					             <i class="fas fa-user-plus"></i>
+					          </div>
+					    </a>
+					</li>
+				    <li>
+				        <a th:href="@{/filter}">
+				            <div class="icon-text">
+				                <i class="fas fa-search"></i>
+				            </div>
+				        </a>
+				    </li>
+				</ul>
             </form>
         </div>
     </div>
