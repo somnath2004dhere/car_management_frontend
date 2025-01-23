@@ -64,11 +64,12 @@
         </div>
         <ul class="nav-links">
             <li><a th:href="@{/}" class="home-link">Home</a></li>
-            <li><a th:href="@{/car-register}">Register</a></li>
-            <li><a th:href="@{/update-car}">Update</a></li>
-            <li><a th:href="@{/filter}">Find</a></li>
+            <li><a th:href="@{/user/filter}">Find</a></li>
+             <li><a th:href="@{/bookings}">My Bookings</a></li>
             <li><a th:href="@{/contact}">Contact</a></li>
             <li><a th:href="@{/about}">About</a></li>
+            <li><a th:href="@{/profile}">My Profile</a></li>
+            
         </ul>
         <div class="hamburger">
             <span></span>
@@ -81,12 +82,9 @@
         <!-- Hero Section -->
         <div class="Hero">
             <div class="left-hero">
-                <h1>Effortless Car Management</h1>
-                <p>Register, update, and manage your cars with ease on our user-friendly platform. Everything you need in one place!</p>
-                <div class="cta-buttons">
-                    <a th:href="@{/car-register}" class="btn">Register Your Car</a>
-                    <a th:href="@{/search-car}" class="btn-secondary">Find a Car</a>
-                </div>
+                <h1>Welcome To CarCaddy</h1>
+                <h3>Car Rental Platform</h3>
+                
             </div>
             <div class="right-hero">
                 <div class="background-color">
@@ -108,7 +106,7 @@
             <div class="car-container">
                 <div class="car-card">
                     <div class="cimg">
-                        <img src="images/Card-Cars/Kia-EV6.jpeg" alt="Kia EV6">
+                        <img th:src="@{/images/Card-Cars/Kia-EV6.jpeg}" alt="Kia EV6">
                     </div>
                     <div class="cmenu">
                         <h3>Kia EV6</h3>
@@ -120,7 +118,7 @@
 
                 <div class="car-card">
                     <div class="cimg">
-                        <img src="images/Card-Cars/BYD-atto-3.jpeg" alt="BYD Atto 3">
+                        <img th:src="@{/images/Card-Cars/BYD-atto-3.jpeg}" alt="BYD Atto 3">
                     </div>
                     <div class="cmenu">
                         <h3>BYD Atto 3</h3>
@@ -131,7 +129,7 @@
                 </div>
                 <div class="car-card">
                     <div class="cimg">
-                        <img src="images/Card-Cars/Tata-Nexon-EV.jpeg" alt="Tata Nexon EV">
+                        <img th:src="@{/images/Card-Cars/Tata-Nexon-EV.jpeg}" alt="Tata Nexon EV">
                     </div>
                     <div class="cmenu">
                         <h3>Tata Nexon EV</h3>
@@ -143,7 +141,7 @@
 
                 <div class="car-card">
                     <div class="cimg">
-                        <img src="images/Card-Cars/Mahindra-BE-6.jpeg" alt="Mahindra BE 6">
+                        <img th:src="@{/images/Card-Cars/Mahindra-BE-6.jpeg}" alt="Mahindra BE 6">
                     </div>
                     <div class="cmenu">
                         <h3>Mahindra BE 6</h3>
@@ -168,7 +166,7 @@
             <div class="car-container">
                 <div class="car-card">
                     <div class="cimg">
-                        <img src="images/Card-Cars/thar.jpeg" alt="Mahindra Thar ROXX">
+                        <img th:src="@{/images/Card-Cars/thar.jpeg}" alt="Mahindra Thar ROXX">
                     </div>
                     <div class="cmenu">
                         <h3>Mahindra Thar ROXX</h3>
@@ -180,7 +178,7 @@
 
                 <div class="car-card">
                     <div class="cimg">
-                        <img src="images/Card-Cars/Toyota-Fortuner.jpeg" alt="Toyota Fortuner">
+                        <img th:src="@{/images/Card-Cars/Toyota-Fortuner.jpeg}" alt="Toyota Fortuner">
                     </div>
                     <div class="cmenu">
                         <h3>Toyota Fortuner</h3>
@@ -192,7 +190,7 @@
 
                 <div class="car-card">
                     <div class="cimg">
-                        <img src="images/Card-Cars/Mahindra-Scorpio-N.jpeg" alt="Mahindra Scorpio N">
+                        <img th:src="@{/images/Card-Cars/Mahindra-Scorpio-N.jpeg}" alt="Mahindra Scorpio N">
                     </div>
                     <div class="cmenu">
                         <h3>Mahindra Scorpio N</h3>
@@ -205,7 +203,7 @@
 
                 <div class="car-card">
                     <div class="cimg">
-                        <img src="images/Card-Cars/Land-Rover-Range-Rover.jpeg" alt="Land Rover Range Rover">
+                        <img th:src="@{/images/Card-Cars/Land-Rover-Range-Rover.jpeg}" alt="Land Rover Range Rover">
                     </div>
                     <div class="cmenu">
                         <h3>Land Rover Range Rover</h3>
@@ -228,7 +226,7 @@
             <div class="car-container">
                 <div class="car-card">
                     <div class="cimg">
-                        <img src="images/Card-Cars/MG-Hector.jpeg" alt="MG Hector">
+                        <img th:src="@{/images/Card-Cars/MG-Hector.jpeg}" alt="MG Hector">
                     </div>
                     <div class="cmenu">
                         <h3>MG Hector</h3>
@@ -240,7 +238,7 @@
 
                 <div class="car-card">
                     <div class="cimg">
-                        <img src="images/Card-Cars/Kia-Carnival.jpeg" alt="Kia Carnival">
+                        <img th:src="@{/images/Card-Cars/Kia-Carnival.jpeg}" alt="Kia Carnival">
                     </div>
                     <div class="cmenu">
                         <h3>Kia Carnival</h3>
@@ -252,7 +250,7 @@
 
                 <div class="car-card">
                     <div class="cimg">
-                        <img src="images/Card-Cars/Hyundai-Alcazar.jpeg" alt="Hyundai Alcazar">
+                        <img th:src="@{/images/Card-Cars/Hyundai-Alcazar.jpeg}" alt="Hyundai Alcazar">
                     </div>
                     <div class="cmenu">
                         <h3>Hyundai Alcazar</h3>
@@ -265,7 +263,7 @@
 
                 <div class="car-card">
                     <div class="cimg">
-                        <img src="images/Card-Cars/Tata-Safari.jpeg" alt="Tata Safari">
+                        <img th:src="@{/images/Card-Cars/Tata-Safari.jpeg}" alt="Tata Safari">
                     </div>
                     <div class="cmenu">
                         <h3>Tata Safari</h3>
@@ -296,12 +294,12 @@
         <div class="footer-section">
           <h4>Quick Links</h4>
           <ul>
-            <li><a th:href="@{/}" class="home-link">Home</a></li>
-            <li><a th:href="@{/car-register}">Register</a></li>
-            <li><a th:href="@{/update-car}">Update</a></li>
-            <li><a th:href="@{/search-car}">Search</a></li>
+            <li><a th:href="@{/user/home}" class="home-link">Home</a></li>
+            <li><a th:href="@{/user/filter}">Find</a></li>
+            <li><a th:href="@{/bookings}">My Bookings</a></li>
             <li><a th:href="@{/contact}">Contact Us</a></li>
             <li><a th:href="@{/about}">About</a></li>
+            <li><a th:href="@{/profile}">My Profile</a></li>
           </ul>
         </div>
         <div class="footer-section">

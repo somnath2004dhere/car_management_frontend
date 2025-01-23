@@ -94,7 +94,7 @@ signupBtn.addEventListener("click", () => {
 	        })
 	        .then((data) => {
 	            alert(isSignup ? "Signup successful!" : "Login successful!");
-	            window.location.href = isSignup ? "/log-in-A" : "/admin/home"; 
+	            window.location.href = isSignup ? "/admin/login" : "/admin/home"; 
 	        })
 	        .catch((error) => {
 	            alert(`Error: ${error.message}`);

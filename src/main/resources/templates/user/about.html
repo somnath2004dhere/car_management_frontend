@@ -18,12 +18,12 @@
             <img th:src="@{/images/logo.png}" alt="Car Management Logo">
         </div>
         <ul class="nav-links">
-            <li><a th:href="@{/}">Home</a></li>
-            <li><a th:href="@{/car-register}">Register</a></li>
-            <li><a th:href="@{/update-car}">Update</a></li>
-            <li><a th:href="@{/filter}">Find</a></li>
+            <li><a th:href="@{/user/home}">Home</a></li>
+            <li><a th:href="@{/user/filter}">Find</a></li>
+               <li><a th:href="@{/bookings}">My Bookings</a></li>
             <li><a th:href="@{/contact}"  >Contact</a></li>
             <li><a th:href="@{/about}" class="home-link">About</a></li>
+            <li><a th:href="@{/profile}">My Profile</a></li>
         </ul>
         <div class="hamburger">
             <span></span>
@@ -79,12 +79,12 @@
         <div class="footer-section">
           <h4>Quick Links</h4>
           <ul>
-            <li><a th:href="@{/}" class="home-link">Home</a></li>
-            <li><a th:href="@{/car-register}">Register</a></li>
-            <li><a th:href="@{/update-car}">Update</a></li>
-            <li><a th:href="@{/search-car}">Search</a></li>
+            <li><a th:href="@{/user/home}" >Home</a></li>
+            <li><a th:href="@{/user/filter}">Find</a></li>
+            <li><a th:href="@{/bookings}">My Bookings</a></li>
             <li><a th:href="@{/contact}">Contact Us</a></li>
-            <li><a th:href="@{/about}">About</a></li>
+            <li><a th:href="@{/about}" class="home-link">About</a></li>
+            <li><a th:href="@{/profile}">My Profile</a></li>
           </ul>
         </div>
         <div class="footer-section">
